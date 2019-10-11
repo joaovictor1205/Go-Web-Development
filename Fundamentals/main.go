@@ -19,13 +19,20 @@ func (p person) create(){
 	fmt.Println("Creating person")
 }
 
+type human interface{
+	create()
+}
+
+func saySomething(h human){
+	h.create()
+}
+
 func main(){
 
 	personOne := person {
 		F_name: "Person",
 		L_name: "One",
 	}
-	personOne.create()
 
 	personOneJSON, _ := json.Marshal(personOne)
 	fmt.Println(string(personOneJSON))
@@ -38,9 +45,11 @@ func main(){
 		},
 		Studying: true,
 	}
-	studentOne.create()
 
 	studentOneJSON, _ := json.Marshal(studentOne)
 	fmt.Println(string(studentOneJSON))
+
+	saySomething(personOne)
+	saySomething(studentOne)
 	
 }
